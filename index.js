@@ -1,4 +1,5 @@
-const API_BASE = 'https://rke143-week12-26op.onrender.com';
+const API_BASE = 'https://rke143-week14.onrender.com';
+
 
 const images = {
   'Korvitsa pirukad': 'https://images.pexels.com/photos/18932267/pexels-photo-18932267/free-photo-of-ornamental-pumpkins-and-a-plate-with-baked-pastry.jpeg',
