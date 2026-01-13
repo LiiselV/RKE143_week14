@@ -14,6 +14,12 @@ const nameMap = {
   'Pumpkin Pancakes': 'Korvitsa pannkoogid'
 };
 
+const normalize = (s) => String(s || '').trim().toLowerCase();
+
+const nameMapNorm = Object.fromEntries(
+  Object.entries(nameMap).map(([en, et]) => [normalize(en), et])
+);
+
 const btn = document.getElementById('btn');
 const titleEl = document.getElementById('title');
 const imgEl = document.getElementById('img');
@@ -38,14 +44,21 @@ async function loadRandomRecipe() {
 
     const data = await response.json();
 
-    const recipeNameEN = data?.recipe?.recipe || '';
-    const recipeNameET = nameMap[recipeNameEN] || recipeNameEN;
+    const recipeNameEN =
+      data?.recipe?.recipe ??
+      data?.recipe?.recipename ??
+      data?.recipe?.recipeName ??
+      '';
+
+    const recipeNameET = nameMapNorm[normalize(recipeNameEN)] || String(recipeNameEN).trim();
 
     const instructions = data?.recipe?.instructions || '';
     const ingredients = Array.isArray(data?.ingredients) ? data.ingredients : [];
 
     titleEl.textContent = recipeNameET;
-    imgEl.src = images[recipeNameET] || images['Korvitsasupp'];
+
+    const imgUrl = images[recipeNameET] || images['Korvitsasupp'];
+    imgEl.src = `${imgUrl}?v=${encodeURIComponent(recipeNameEN)}`;
     imgEl.alt = recipeNameET;
 
     ingredientsEl.innerHTML = '';
