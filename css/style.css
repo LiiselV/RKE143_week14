@@ -50,12 +50,15 @@ button:hover {
   padding: 20px;
 }
 
-.img {
+img {
+  max-width: 220px;
   width: 100%;
-  max-width: 400px;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 10px;
 }
+
 
 ul {
   list-style: none;
