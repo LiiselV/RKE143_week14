@@ -1,15 +1,17 @@
 const API_BASE = 'https://rke143-week14.onrender.com';
 
-
 const images = {
   'Korvitsa pirukad': 'https://images.pexels.com/photos/18932267/pexels-photo-18932267/free-photo-of-ornamental-pumpkins-and-a-plate-with-baked-pastry.jpeg',
   'Korvitsa koogikesed': 'https://images.pexels.com/photos/4917092/pexels-photo-4917092.jpeg',
   'Korvitsasupp': 'https://images.pexels.com/photos/5605535/pexels-photo-5605535.jpeg',
   'Korvitsa pannkoogid': 'https://images.pexels.com/photos/5377574/pexels-photo-5377574.jpeg',
-  'Pumpkin Pasties': 'https://images.pexels.com/photos/18932267/pexels-photo-18932267/free-photo-of-ornamental-pumpkins-and-a-plate-with-baked-pastry.jpeg',
-  'Pumpkin Tartlets': 'https://images.pexels.com/photos/4917092/pexels-photo-4917092.jpeg',
-  'Creamy Pumpkin Soup': 'https://images.pexels.com/photos/5605535/pexels-photo-5605535.jpeg',
-  'Pumpkin Pancakes': 'https://images.pexels.com/photos/5377574/pexels-photo-5377574.jpeg'
+};
+
+const nameMap = {
+  'Pumpkin Pasties': 'Korvitsa pirukad',
+  'Pumpkin Tartlets': 'Korvitsa koogikesed',
+  'Creamy Pumpkin Soup': 'Korvitsasupp',
+  'Pumpkin Pancakes': 'Korvitsa pannkoogid'
 };
 
 const btn = document.getElementById('btn');
@@ -36,13 +38,15 @@ async function loadRandomRecipe() {
 
     const data = await response.json();
 
-    const recipeName = data.recipe.recipename;
-    const instructions = data.recipe.instructions || '';
-    const ingredients = Array.isArray(data.ingredients) ? data.ingredients : [];
+    const recipeNameEN = data?.recipe?.recipe || '';
+    const recipeNameET = nameMap[recipeNameEN] || recipeNameEN;
 
-    titleEl.textContent = recipeName;
-    imgEl.src = images[recipeName] || images['Korvitsasupp'] || images['Creamy Pumpkin Soup'];
-    imgEl.alt = recipeName;
+    const instructions = data?.recipe?.instructions || '';
+    const ingredients = Array.isArray(data?.ingredients) ? data.ingredients : [];
+
+    titleEl.textContent = recipeNameET;
+    imgEl.src = images[recipeNameET] || images['Korvitsasupp'];
+    imgEl.alt = recipeNameET;
 
     ingredientsEl.innerHTML = '';
     ingredients.forEach(ing => {
@@ -51,7 +55,9 @@ async function loadRandomRecipe() {
       ingredientsEl.appendChild(li);
     });
 
-    const safeInstructions = String(instructions).replaceAll('<br>', '\n').replaceAll('\\n', '\n');
+    const safeInstructions = String(instructions)
+      .replaceAll('<br>', '\n')
+      .replaceAll('\\n', '\n');
 
     instructionsEl.innerHTML = '';
     safeInstructions
