@@ -4,7 +4,7 @@ const images = {
   'Korvitsa pirukad': 'https://images.pexels.com/photos/18932267/pexels-photo-18932267/free-photo-of-ornamental-pumpkins-and-a-plate-with-baked-pastry.jpeg',
   'Korvitsa koogikesed': 'https://images.pexels.com/photos/4917092/pexels-photo-4917092.jpeg',
   'Korvitsasupp': 'https://images.pexels.com/photos/5605535/pexels-photo-5605535.jpeg',
-  'Korvitsa pannkoogid': 'https://images.pexels.com/photos/5377574/pexels-photo-5377574.jpeg',
+  'Korvitsa pannkoogid': 'https://images.pexels.com/photos/5377574/pexels-photo-5377574.jpeg'
 };
 
 const nameMap = {
@@ -13,12 +13,6 @@ const nameMap = {
   'Creamy Pumpkin Soup': 'Korvitsasupp',
   'Pumpkin Pancakes': 'Korvitsa pannkoogid'
 };
-
-const normalize = (s) => String(s || '').trim().toLowerCase();
-
-const nameMapNorm = Object.fromEntries(
-  Object.entries(nameMap).map(([en, et]) => [normalize(en), et])
-);
 
 const btn = document.getElementById('btn');
 const titleEl = document.getElementById('title');
@@ -50,7 +44,7 @@ async function loadRandomRecipe() {
       data?.recipe?.recipeName ??
       '';
 
-    const recipeNameET = nameMapNorm[normalize(recipeNameEN)] || String(recipeNameEN).trim();
+    const recipeNameET = nameMap[recipeNameEN] || recipeNameEN;
 
     const instructions = data?.recipe?.instructions || '';
     const ingredients = Array.isArray(data?.ingredients) ? data.ingredients : [];

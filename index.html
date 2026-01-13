@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
   <title>Suvaline retsept</title>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
+  <div class="page">
+    <header class="top">
       <h1>Suvaline retsept</h1>
       <button id="btn" type="button">Uus retsept</button>
-    </div>
+    </header>
 
-    <div id="status" class="status"></div>
+    <div id="status"></div>
 
-    <div class="card">
-      <img id="img" class="img" src="" alt="">
-      <div class="content">
-        <h2 id="title"></h2>
+    <main class="card">
+      <h2 id="title"></h2>
 
-        <h3>Koostisosad</h3>
-        <ul id="ingredients"></ul>
+      <img id="img" src="" alt="" />
 
-        <h3>Juhised</h3>
-        <div id="instructions"></div>
-      </div>
-    </div>
+      <h3>Koostisosad</h3>
+      <ul id="ingredients"></ul>
+
+      <h3>Juhised</h3>
+      <div id="instructions"></div>
+    </main>
   </div>
 
   <script src="index.js"></script>
